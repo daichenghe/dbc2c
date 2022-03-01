@@ -1,0 +1,226 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: ACC GW EPBi SRS SAS EPS EMS TCU AWD ESPi PBi
+
+
+BO_ 520 EPBi_208: 8 EPBi
+ SG_ Wheel_Speed_FL_Data : 52|13@0+ (0.05625,0) [0|360] "km/h"  EPBi,EMS,TCU,ACC,AWD,EPS,GW
+ SG_ Wheel_Speed_FL_Direction : 54|2@0+ (1,0) [0|3] ""  EPBi,EMS,ACC,EPS,GW
+ SG_ Wheel_Speed_FR_Data : 36|13@0+ (0.05625,0) [0|360] "km/h"  EPBi,EMS,TCU,ACC,AWD,EPS,GW
+ SG_ Wheel_Speed_FR_Direction : 38|2@0+ (1,0) [0|3] ""  EPBi,EMS,ACC,EPS,GW
+ SG_ Wheel_Speed_RL_Data : 20|13@0+ (0.05625,0) [0|360] "km/h"  EPBi,EMS,TCU,ACC,AWD,EPS,GW
+ SG_ Wheel_Speed_RL_Direction : 22|2@0+ (1,0) [0|3] ""  EPBi,EMS,ACC,EPS,GW
+ SG_ Wheel_Speed_RR_Data : 4|13@0+ (0.05625,0) [0|360] "km/h"  EPBi,EMS,TCU,ACC,AWD,EPS,GW
+ SG_ Wheel_Speed_RR_Direction : 6|2@0+ (1,0) [0|3] ""  EPBi,EMS,ACC,EPS,GW
+
+BO_ 536 EPBi_218: 6 EPBi
+ SG_ ESP_VehicleSpeed : 36|13@0+ (0.05625,0) [0|360] "km/h"  EPBi,EMS,SRS,EPS,GW,ACC
+
+BO_ 632 EPBi_278: 6 EPBi
+ SG_ ESP_LongAccel : 31|10@0+ (0.03125,-16) [-16|15.90625] "m/s2"  EPBi,ACC,EMS,GW
+ SG_ ESP_LatAccel : 23|8@0+ (0.1,-12.7) [-12.7|12.7] "m/s2"  EPBi,ACC,EMS,GW
+ SG_ ESP_YawRate : 37|14@0+ (0.01,-81.91) [-81.91|81.91] "degree/s"  EPBi,ACC,GW,EPS
+
+BO_ 384 SAS_180: 3 SAS
+ SG_ SAS_SteeringAngleSpeed : 23|8@0+ (4,0) [0|1016] "deg/s"  SAS,EPBi,ACC,GW,EMS
+ SG_ SAS_SteeringAngle : 7|16@0- (0.1,0) [-780|780] "degree"  SAS,EPBi,EPS,GW,ACC,EMS,AWD
+
+BO_ 616 TCU_268: 2 TCU
+ SG_ AT_ActualGear : 11|4@0+ (1,0) [0|15] ""  GW,AWD,ACC,EPBi,EMS,TCU
+
+
+
+BA_DEF_ SG_  "GenSigStartValue" INT 0 0;
+BA_DEF_ SG_  "GenSigInactiveValue" INT 0 0;
+BA_DEF_ SG_  "GenSigCycleTimeActive" INT 0 0;
+BA_DEF_ SG_  "GenSigCycleTime" INT 0 0;
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActiveWithRepetition","NoSigSendType","NotUsed","NotUsed","NotUsed","NotUsed","NotUsed";
+BA_DEF_  "Baudrate" INT 0 1000000;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_  "NmType" STRING ;
+BA_DEF_  "Manufacturer" STRING ;
+BA_DEF_  "VersionYear" INT 2009 2210;
+BA_DEF_  "VersionWeek" INT 0 82;
+BA_DEF_  "VersionNumber" INT 0 65535;
+BA_DEF_  "VersionMonth" INT 0 18;
+BA_DEF_  "VersionDay" INT 0 49;
+BA_DEF_ BO_  "TpTxIndex" INT 0 255;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "NmStationAddress" HEX 0 0;
+BA_DEF_ BU_  "NmNode" ENUM  "No","Yes";
+BA_DEF_ BO_  "NmMessage" ENUM  "No","Yes";
+BA_DEF_ SG_  "NWM-WakeupAllowed" ENUM  "No","Yes";
+BA_DEF_ BU_  "ILUsed" ENUM  "No","Yes";
+BA_DEF_  "ILTxTimeout" INT 0 100;
+BA_DEF_ BU_  "GenNodSleepTime" INT 0 65535;
+BA_DEF_  "GenNWMTalkNM" STRING ;
+BA_DEF_  "GenNWMSleepTime" INT 0 1000000;
+BA_DEF_  "GenNWMGotoMode_BusSleep" STRING ;
+BA_DEF_  "GenNWMGotoMode_Awake" STRING ;
+BA_DEF_  "GenNWMApCanWakeUp" STRING ;
+BA_DEF_  "GenNWMApCanSleep" STRING ;
+BA_DEF_  "GenNWMApCanOn" STRING ;
+BA_DEF_  "GenNWMApCanOff" STRING ;
+BA_DEF_  "GenNWMApCanNormal" STRING ;
+BA_DEF_  "GenNWMApBusSleep" STRING ;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cyclic","Event","NotUsed","NotUsed","NotUsed","Cyclic","NotUsed","IfActive","NoMsgSendType","NotUsed";
+BA_DEF_ BO_  "GenMsgILSupport" ENUM  "No","Yes";
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+BA_DEF_ BO_  "DiagState" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagResponse" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagRequest" ENUM  "No","Yes";
+BA_DEF_ BU_  "CANoeStartDelay" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMin" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMax" INT 0 0;
+BA_DEF_ BU_  "CANoeDrift" INT 0 0;
+BA_DEF_REL_ BU_BO_REL_  "GenMsgStartDelayTime" INT 0 65535;
+BA_DEF_REL_ BU_BO_REL_  "GenMsgDelayTime" INT 0 65535;
+BA_DEF_REL_ BU_BO_REL_  "GenMsgNrOfRepetition" INT 0 65535;
+BA_DEF_REL_ BU_BO_REL_  "GenMsgCycleTimeFast" INT 0 65535;
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_DEF_DEF_  "GenSigInactiveValue" 0;
+BA_DEF_DEF_  "GenSigCycleTimeActive" 0;
+BA_DEF_DEF_  "GenSigCycleTime" 0;
+BA_DEF_DEF_  "GenSigSendType" "Cyclic";
+BA_DEF_DEF_  "Baudrate" 500000;
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "NmType" "";
+BA_DEF_DEF_  "Manufacturer" "CHANA";
+BA_DEF_DEF_  "VersionYear" 2010;
+BA_DEF_DEF_  "VersionWeek" 0;
+BA_DEF_DEF_  "VersionNumber" 0;
+BA_DEF_DEF_  "VersionMonth" 11;
+BA_DEF_DEF_  "VersionDay" 0;
+BA_DEF_DEF_  "TpTxIndex" 0;
+BA_DEF_DEF_  "NodeLayerModules" "OSEKNM01.dll,CANoeILNLVector.dll";
+BA_DEF_DEF_  "NmStationAddress" 0;
+BA_DEF_DEF_  "NmNode" "No";
+BA_DEF_DEF_  "NmMessage" "No";
+BA_DEF_DEF_  "NWM-WakeupAllowed" "";
+BA_DEF_DEF_  "ILUsed" "Yes";
+BA_DEF_DEF_  "ILTxTimeout" 0;
+BA_DEF_DEF_  "GenNodSleepTime" 0;
+BA_DEF_DEF_  "GenNWMTalkNM" "TalkNM()";
+BA_DEF_DEF_  "GenNWMSleepTime" 0;
+BA_DEF_DEF_  "GenNWMGotoMode_BusSleep" "GotoMode_BusSleep()";
+BA_DEF_DEF_  "GenNWMGotoMode_Awake" "GotoMode_Awake()";
+BA_DEF_DEF_  "GenNWMApCanWakeUp" "apCanWakeUp()";
+BA_DEF_DEF_  "GenNWMApCanSleep" "apCanSleep()";
+BA_DEF_DEF_  "GenNWMApCanOn" "apCanOn()";
+BA_DEF_DEF_  "GenNWMApCanOff" "apCanOff()";
+BA_DEF_DEF_  "GenNWMApCanNormal" "apCanNormal()";
+BA_DEF_DEF_  "GenNWMApBusSleep" "apBusSleep()";
+BA_DEF_DEF_  "GenMsgSendType" "NoMsgSendType";
+BA_DEF_DEF_  "GenMsgILSupport" "Yes";
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "DiagState" "No";
+BA_DEF_DEF_  "DiagResponse" "No";
+BA_DEF_DEF_  "DiagRequest" "No";
+BA_DEF_DEF_  "CANoeStartDelay" 0;
+BA_DEF_DEF_  "CANoeJitterMin" 0;
+BA_DEF_DEF_  "CANoeJitterMax" 0;
+BA_DEF_DEF_  "CANoeDrift" 0;
+BA_DEF_DEF_REL_ "GenMsgStartDelayTime" 0;
+BA_DEF_DEF_REL_ "GenMsgDelayTime" 0;
+BA_DEF_DEF_REL_ "GenMsgNrOfRepetition" 0;
+BA_DEF_DEF_REL_ "GenMsgCycleTimeFast" 0;
+BA_ "Manufacturer" "CHANA";
+BA_ "NmType" "OSEK";
+BA_ "BusType" "CAN";
+BA_ "Baudrate" 500000;
+BA_ "VersionDay" 2;
+BA_ "VersionMonth" 11;
+BA_ "VersionNumber" 11;
+BA_ "VersionYear" 2016;
+BA_ "GenMsgSendType" BO_ 520 0;
+BA_ "GenMsgCycleTime" BO_ 520 20;
+BA_ "GenMsgSendType" BO_ 536 0;
+BA_ "GenMsgCycleTime" BO_ 536 10;
+BA_ "GenMsgSendType" BO_ 632 0;
+BA_ "GenMsgCycleTime" BO_ 632 20;
+BA_ "GenMsgSendType" BO_ 384 0;
+BA_ "GenMsgCycleTime" BO_ 384 10;
+BA_ "GenMsgSendType" BO_ 616 0;
+BA_ "GenMsgCycleTime" BO_ 616 10;
+BA_ "GenSigSendType" SG_ 520 Wheel_Speed_FL_Data 0;
+BA_ "GenSigCycleTime" SG_ 520 Wheel_Speed_FL_Data 20;
+BA_ "GenSigSendType" SG_ 520 Wheel_Speed_FL_Direction 0;
+BA_ "GenSigCycleTime" SG_ 520 Wheel_Speed_FL_Direction 20;
+BA_ "GenSigSendType" SG_ 520 Wheel_Speed_FR_Data 0;
+BA_ "GenSigCycleTime" SG_ 520 Wheel_Speed_FR_Data 20;
+BA_ "GenSigSendType" SG_ 520 Wheel_Speed_FR_Direction 0;
+BA_ "GenSigCycleTime" SG_ 520 Wheel_Speed_FR_Direction 20;
+BA_ "GenSigSendType" SG_ 520 Wheel_Speed_RL_Data 0;
+BA_ "GenSigCycleTime" SG_ 520 Wheel_Speed_RL_Data 20;
+BA_ "GenSigSendType" SG_ 520 Wheel_Speed_RL_Direction 0;
+BA_ "GenSigCycleTime" SG_ 520 Wheel_Speed_RL_Direction 20;
+BA_ "GenSigSendType" SG_ 520 Wheel_Speed_RR_Data 0;
+BA_ "GenSigCycleTime" SG_ 520 Wheel_Speed_RR_Data 20;
+BA_ "GenSigSendType" SG_ 520 Wheel_Speed_RR_Direction 0;
+BA_ "GenSigCycleTime" SG_ 520 Wheel_Speed_RR_Direction 20;
+BA_ "GenSigSendType" SG_ 536 ESP_VehicleSpeed 0;
+BA_ "GenSigCycleTime" SG_ 536 ESP_VehicleSpeed 10;
+BA_ "GenSigSendType" SG_ 632 ESP_LongAccel 0;
+BA_ "GenSigCycleTime" SG_ 632 ESP_LongAccel 20;
+BA_ "GenSigSendType" SG_ 632 ESP_LatAccel 0;
+BA_ "GenSigCycleTime" SG_ 632 ESP_LatAccel 20;
+BA_ "GenSigSendType" SG_ 632 ESP_YawRate 0;
+BA_ "GenSigCycleTime" SG_ 632 ESP_YawRate 20;
+BA_ "GenSigSendType" SG_ 384 SAS_SteeringAngleSpeed 0;
+BA_ "GenSigCycleTime" SG_ 384 SAS_SteeringAngleSpeed 10;
+BA_ "GenSigSendType" SG_ 384 SAS_SteeringAngle 0;
+BA_ "GenSigCycleTime" SG_ 384 SAS_SteeringAngle 10;
+BA_ "GenSigSendType" SG_ 616 AT_ActualGear 0;
+BA_ "GenSigCycleTime" SG_ 616 AT_ActualGear 10;
+VAL_ 520 Wheel_Speed_FL_Data 0 "" ;
+VAL_ 520 Wheel_Speed_FL_Direction 0 "Forward" 1 "backward" 2 "Standstill" 3 "Invalid" ;
+VAL_ 520 Wheel_Speed_FR_Data 0 "" ;
+VAL_ 520 Wheel_Speed_FR_Direction 0 "Forward" 1 "" 2 "Standstill" 3 "Invalid" ;
+VAL_ 520 Wheel_Speed_RL_Data 0 "" ;
+VAL_ 520 Wheel_Speed_RL_Direction 0 "Forward" 1 "backward" 2 "Standstill" 3 "Invalid" ;
+VAL_ 520 Wheel_Speed_RR_Data 0 "" ;
+VAL_ 520 Wheel_Speed_RR_Direction 0 "Forward" 1 "" 2 "Standstill" 3 "Invalid" ;
+VAL_ 536 ESP_VehicleSpeed 0 "0~360km/h" 6401 "Reserved" 8191 "Invalid" ;
+VAL_ 632 ESP_LongAccel 0 "" ;
+VAL_ 632 ESP_LatAccel 0 "" ;
+VAL_ 632 ESP_YawRate 0 "" ;
+VAL_ 384 SAS_SteeringAngleSpeed 0 " N ¡Á 4 , for 0 < N ¡Ü 254
+   = error signaled , for N > 254" ;
+VAL_ 384 SAS_SteeringAngle 0 " N ¡Á 0.1 , for 0 < N ¡Ü 32767
+   = (N-65536) ¡Á 0.1 , for N £¾ 32767
+Note:       that Clockwise rotation is ¡®-¡® and anti-Clockwise rotation is ¡®+¡®" ;
+VAL_ 616 AT_ActualGear 0 "Neutral" 1 "1st gear" 2 "2nd gear" 3 "3rd gear" 4 "4th gear" 5 "5th gear" 6 "6th gear" 7 "Reserved" 9 "Reverse" 10 "Parking" 11 "Reserved" 15 "Invalid" ;
+

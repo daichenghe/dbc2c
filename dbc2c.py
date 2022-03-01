@@ -38,7 +38,7 @@ def mkdir(path):
     folder = os.path.exists(path)
     if not folder:                   #判断是否存在文件夹如果不存在则创建为文件夹
         os.makedirs(path)            #makedirs 创建文件时如果路径不存在会创建这个路径
-        print "---  new folder...  ---"
+        print ("---  new folder...  ---")
 
 class Signal(object):
     def __init__(self, name, bit_start, bit_size, endian_and_sign, scale, offset, min_val, max_val, unit, comment, recipients, mux, signal_min, signal_max):
@@ -47,7 +47,7 @@ class Signal(object):
         self.bit_start = int(bit_start)
         self.bit_size = int(bit_size)
         self.endian_and_sign = endian_and_sign
- 
+        print(self.endian_and_sign)
         self.offset = float(offset)
         self.offset_str = offset
         self.scale = float(scale)
@@ -81,6 +81,7 @@ class Signal(object):
  
     # Returns true if the signal is defined in the DBC as a signed type
     def is_real_signed(self):
+        print(self.endian_and_sign[0], self.endian_and_sign[1])
         return '-' == self.endian_and_sign[1]
         
     # Returns true if the signal is big endian
@@ -196,6 +197,7 @@ class Signal(object):
         code += s
         
         if self.is_msb():
+            print('test1')
             #big endian
             # Stuff the raw data into individual bytes
             bit_pos = self.bit_start
@@ -222,6 +224,7 @@ class Signal(object):
                 bit_pos += bits_in_this_byte
                 remaining -= bits_in_this_byte
         else:
+            print('test2')
             #little endian
             bit_pos = self.bit_start
             remaining = self.bit_size
@@ -966,7 +969,7 @@ def main(argv):
             '''
             unit = t[6].strip('""')
             recipients = t[-1].strip('\n').split(',')
- 
+            print('xxxxxxx', endian_and_sign)
             # Add the signal the last message object
             sig = Signal(t[1], bit_start, bit_size, endian_and_sign, scale, offset, min_val, max_val, unit, "comment", recipients, mux, signal_min, signal_max)
             dbc.messages[last_mid].add_signal(sig)
@@ -1116,6 +1119,6 @@ def main(argv):
  
  
 if __name__ == "__main__":
-    print "start generate dbc c code!!!"
+    print ("start generate dbc c code!!!")
     main(sys.argv[1:])
-    print "generate the dbc c code Successfully!!!"
+    print ("generate the dbc c code Successfully!!!")
