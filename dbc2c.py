@@ -5,6 +5,7 @@ import sys, getopt
 import re
 import os
 from collections import OrderedDict
+import math
  
 """
 @Author: Preet
@@ -47,7 +48,7 @@ class Signal(object):
         self.bit_start = int(bit_start)
         self.bit_size = int(bit_size)
         self.endian_and_sign = endian_and_sign
-        print(self.endian_and_sign)
+        #print(self.endian_and_sign)
         self.offset = float(offset)
         self.offset_str = offset
         self.scale = float(scale)
@@ -81,7 +82,7 @@ class Signal(object):
  
     # Returns true if the signal is defined in the DBC as a signed type
     def is_real_signed(self):
-        print(self.endian_and_sign[0], self.endian_and_sign[1])
+        #print(self.endian_and_sign[0], self.endian_and_sign[1])
         return '-' == self.endian_and_sign[1]
         
     # Returns true if the signal is big endian
@@ -160,7 +161,7 @@ class Signal(object):
                 comt += r
             else:
                 comt += "," + r
- 
+        comt+= "\n"
         return comt + code + "\n"
  
     # Get the encode code of the signal
@@ -197,8 +198,7 @@ class Signal(object):
         code += s
         
         if self.is_msb():
-            print('test1')
-            #big endian
+            #intel
             # Stuff the raw data into individual bytes
             bit_pos = self.bit_start
             remaining = self.bit_size
@@ -224,31 +224,63 @@ class Signal(object):
                 bit_pos += bits_in_this_byte
                 remaining -= bits_in_this_byte
         else:
-            print('test2')
-            #little endian
-            bit_pos = self.bit_start
-            remaining = self.bit_size
-            byte_num = int(self.bit_start / 8)
-            while remaining > 0:
-                bits_in_this_byte = MIN((bit_pos % 8)+1, remaining)
-     
-                s = ""
-                s += ("    bytes[" + str(byte_num) + "] |= (((uint8_t)(" + raw_sig_name + " >> " + str(
-                    remaining - bits_in_this_byte) + ")")
-                s += (" & 0x" + format(2 ** bits_in_this_byte - 1, '02x') + ") << " + str(bit_pos % 8 - bits_in_this_byte + 1) + ")")
-                s += ("; //< " + str(bits_in_this_byte) + " bit(s) starting from B" + str(bit_pos) + "\n")
-     
-                # Optimize
-                s = s.replace(" >> 0", "")
-                s = s.replace(" << 0", "")
-                # Cannot optimize by removing 0xff just for code safety
-                #s = s.replace(" & 0xff", "")
-     
-                code += s
-                byte_num += 1
-     
-                remaining -= bits_in_this_byte
-                bit_pos = byte_num * 8 + 7
+            #print('test2')
+            #Motorola
+            if True:
+                bit_start_virtul = (8 - (self.bit_start+1)%8)%8 + 8*(math.ceil((self.bit_start+1)/8 - 1)) + 1 - self.bit_size
+                #print((8 - (self.bit_start+1)%8)%8, 8*(math.ceil((self.bit_start+1)/8 - 1)))
+                #print((8 - (self.bit_start+1)%8), 8*(int((self.bit_start+1)/8)), bit_start_virtul)
+                self.bit_start = 8 - (bit_start_virtul+1)%8 + int((bit_start_virtul+1)/8) * 8
+                #print((8 - (self.bit_start+1)%8), 8*(int((self.bit_start+1)/8)), (bit_start_virtul+1)%8, int((bit_start_virtul+1)/8) * 8, bit_start_virtul, self.bit_start)
+                bit_pos = self.bit_start
+                remaining = self.bit_size
+                byte_num = int(self.bit_start / 8)
+                while remaining > 0:
+                    bits_in_this_byte = MIN((bit_pos % 8)+1, remaining)
+                    print('test0', byte_num, bit_pos)
+                    s = ""
+                    s += ("    bytes[" + str(byte_num) + "] |= (((uint8_t)(" + raw_sig_name + " >> " + str(
+                        remaining - bits_in_this_byte) + ")")
+                    #print(s)
+                    s += (" & 0x" + format(2 ** bits_in_this_byte - 1, '02x') + ") << " + str(bit_pos % 8 - bits_in_this_byte + 1) + ")")
+                    #print(s)                    
+                    s += ("; //< " + str(bits_in_this_byte) + " bit(s) starting from B" + str(bit_pos) + "\n")
+                    #print(s)         
+                    # Optimize
+                    s = s.replace(" >> 0", "")
+                    s = s.replace(" << 0", "")
+                    # Cannot optimize by removing 0xff just for code safety
+                    #s = s.replace(" & 0xff", "")
+                    print(s)    
+                    code += s
+                    byte_num += 1
+                    print('test1', byte_num, bit_pos)
+                    remaining -= bits_in_this_byte
+                    bit_pos = byte_num * 8 + 7            
+            else:
+                bit_pos = self.bit_start
+                remaining = self.bit_size
+                byte_num = int(self.bit_start / 8)
+                while remaining > 0:
+                    bits_in_this_byte = MIN((bit_pos % 8)+1, remaining)
+         
+                    s = ""
+                    s += ("    bytes[" + str(byte_num) + "] |= (((uint8_t)(" + raw_sig_name + " >> " + str(
+                        remaining - bits_in_this_byte) + ")")
+                    s += (" & 0x" + format(2 ** bits_in_this_byte - 1, '02x') + ") << " + str(bit_pos % 8 - bits_in_this_byte + 1) + ")")
+                    s += ("; //< " + str(bits_in_this_byte) + " bit(s) starting from B" + str(bit_pos) + "\n")
+         
+                    # Optimize
+                    s = s.replace(" >> 0", "")
+                    s = s.replace(" << 0", "")
+                    # Cannot optimize by removing 0xff just for code safety
+                    #s = s.replace(" & 0xff", "")
+         
+                    code += s
+                    byte_num += 1
+         
+                    remaining -= bits_in_this_byte
+                    bit_pos = byte_num * 8 + 7
         return code
  
     # Get the decode code of the signal
@@ -285,6 +317,10 @@ class Signal(object):
         else: 
             # little Endian:
             #code = ("//< " + self.name + "  bit_start:B" + str(self.bit_start) + "   bit_size:" + str(self.bit_size) + "\n")
+            if True:
+                bit_start_virtul = (8 - (self.bit_start+1)%8)%8 + 8*(math.ceil((self.bit_start+1)/8 - 1)) + 1 - self.bit_size
+                self.bit_start = 8 - (bit_start_virtul+1)%8 + int((bit_start_virtul+1)/8) * 8
+
             while remaining > 0:
                 bits_in_this_byte = MIN((bit_pos % 8)+1, remaining)
      
@@ -829,8 +865,7 @@ def main(argv):
                 print('/// ERROR /')
                 print('')
                 raise ValueError('#error msg id '+ msg_id + ' has already been used')
- 
-            if int(msg_length) > 8 or int(msg_length) < 1:
+            if int(msg_length) > 64 or int(msg_length) < 1:
                 print('/// ERROR /')
                 print('#error' + 'has an incorrect number of bytes. It must be between 1 and 8 bytes.')
                 print('/// ERROR /')
@@ -969,7 +1004,7 @@ def main(argv):
             '''
             unit = t[6].strip('""')
             recipients = t[-1].strip('\n').split(',')
-            print('xxxxxxx', endian_and_sign)
+            #print('xxxxxxx', endian_and_sign)
             # Add the signal the last message object
             sig = Signal(t[1], bit_start, bit_size, endian_and_sign, scale, offset, min_val, max_val, unit, "comment", recipients, mux, signal_min, signal_max)
             dbc.messages[last_mid].add_signal(sig)
