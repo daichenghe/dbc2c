@@ -1,0 +1,49 @@
+VERSION "created by canmatrix"
+
+
+NS_ :
+
+BS_:
+
+BU_: 
+
+
+BO_ 1280 INSPVAX: 53 Vector__XXX
+ SG_ ACC_X : 8|16@0+ (0.0001220703125,-4) [-4|4] "g" Vector__XXX
+ SG_ ACC_Y : 24|16@0+ (0.0001220703125,-4) [-4|4] "g" Vector__XXX
+ SG_ ACC_Z : 40|16@0+ (0.0001220703125,-4) [-4|4] "g" Vector__XXX
+ SG_ GYRO_X : 56|16@0+ (0.0076293,-250) [-250|250] "deg/s" Vector__XXX
+ SG_ GYRO_Y : 72|16@0+ (0.0076293,-250) [-250|250] "deg/s" Vector__XXX
+ SG_ GYRO_Z : 88|16@0+ (0.0076293,-250) [-250|250] "deg/s" Vector__XXX
+ SG_ INS_PitchAngle : 104|16@0+ (0.010986,-250) [-360|360] "deg" Vector__XXX
+ SG_ INS_RollAngle : 120|16@0+ (0.010986,-250) [-360|360] "deg" Vector__XXX
+ SG_ INS_HeadingAngle : 136|16@0+ (0.010986,-250) [-360|360] "deg" Vector__XXX
+ SG_ INS_LocatHeight : 168|32@0+ (0.001,-10000) [-10000|10000] "m" Vector__XXX
+ SG_ INS_Time : 200|32@0+ (1,0) [0|4.29497e9] "ms" Vector__XXX
+ SG_ INS_Latitude : 232|32@0+ (0.0000001,-180) [-180|180] "deg" Vector__XXX 
+ SG_ INS_Longitude : 264|32@0+ (0.0000001,-180) [-180|180] "deg" Vector__XXX
+ SG_ INS_NorthSpd : 280|16@0+ (0.0030517,-100) [-100|100] "m/s" Vector__XXX
+ SG_ INS_EastSpd : 296|16@0+ (0.0030517,-100) [-100|100] "m/s" Vector__XXX
+ SG_ INS_ToGroundSpd : 312|16@0+ (0.0030517,-100) [-100|100] "m/s" Vector__XXX
+ SG_ INS_GpsFlag_Pos : 320|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ INS_NumSV : 328|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ INS_GpsFlag_Heading : 336|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ INS_Gps_Age : 344|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ INS_Car_Status : 352|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ INS_Status : 360|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ INS_Std_Lat : 376|16@0+ (0.001,0) [0|655.35] "" Vector__XXX
+ SG_ INS_Std_Lon : 392|16@0+ (0.001,0) [0|655.35] "" Vector__XXX
+ SG_ INS_Std_LocatHeight : 408|16@0+ (0.001,0) [0|655.35] "" Vector__XXX
+ SG_ INS_Std_Heading : 424|16@0+ (0.001,0) [0|655.35] "" Vector__XXX
+
+BO_ 1281 BASE_RTCM: 64 Vector__XXX
+ SG_ BASE : 56|64@0+ (0,0) [0|0] "" Vector__XXX
+
+
+BA_DEF_ BO_ "GenMsgCycleTime" INT 0 65535;
+BA_DEF_ BO_ "GenMsgSendType" ENUM "cyclic","OnChange";
+
+BA_ "GenMsgCycleTime" BO_ 1280 10;
+BA_ "GenMsgSendType" BO_ 1280 "Cyclic";
+
+VAL_ 2566205220 INS_GpsFlag_Pos 0 "NONE" 1 "single" 4 "fix" 5 "float";

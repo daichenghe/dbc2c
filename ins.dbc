@@ -8,33 +8,51 @@ BS_:
 BU_: 
 
 
-BO_ 1280 INSPVAX: 53 Vector__XXX
+BO_ 1280 INS_ACC: 6 Vector__XXX
  SG_ ACC_X : 8|16@0+ (0.0001220703125,-4) [-4|4] "g" Vector__XXX
  SG_ ACC_Y : 24|16@0+ (0.0001220703125,-4) [-4|4] "g" Vector__XXX
  SG_ ACC_Z : 40|16@0+ (0.0001220703125,-4) [-4|4] "g" Vector__XXX
- SG_ GYRO_X : 56|16@0+ (0.0076293,-250) [-250|250] "deg/s" Vector__XXX
- SG_ GYRO_Y : 72|16@0+ (0.0076293,-250) [-250|250] "deg/s" Vector__XXX
- SG_ GYRO_Z : 88|16@0+ (0.0076293,-250) [-250|250] "deg/s" Vector__XXX
- SG_ INS_PitchAngle : 104|16@0+ (0.010986,-250) [-360|360] "deg" Vector__XXX
- SG_ INS_RollAngle : 120|16@0+ (0.010986,-250) [-360|360] "deg" Vector__XXX
- SG_ INS_HeadingAngle : 136|16@0+ (0.010986,-250) [-360|360] "deg" Vector__XXX
- SG_ INS_LocatHeight : 168|32@0+ (0.001,-10000) [-10000|10000] "m" Vector__XXX
- SG_ INS_Time : 200|32@0+ (1,0) [0|4.29497e9] "ms" Vector__XXX
- SG_ INS_Latitude : 232|32@0+ (0.0000001,-180) [-180|180] "deg" Vector__XXX 
- SG_ INS_Longitude : 264|32@0+ (0.0000001,-180) [-180|180] "deg" Vector__XXX
- SG_ INS_NorthSpd : 280|16@0+ (0.0030517,-100) [-100|100] "m/s" Vector__XXX
- SG_ INS_EastSpd : 296|16@0+ (0.0030517,-100) [-100|100] "m/s" Vector__XXX
- SG_ INS_ToGroundSpd : 312|16@0+ (0.0030517,-100) [-100|100] "m/s" Vector__XXX
- SG_ INS_GpsFlag_Pos : 320|8@0+ (1,0) [0|255] "" Vector__XXX
- SG_ INS_NumSV : 328|8@0+ (1,0) [0|255] "" Vector__XXX
- SG_ INS_GpsFlag_Heading : 336|8@0+ (1,0) [0|255] "" Vector__XXX
- SG_ INS_Gps_Age : 344|8@0+ (1,0) [0|255] "" Vector__XXX
- SG_ INS_Car_Status : 352|8@0+ (1,0) [0|255] "" Vector__XXX
- SG_ INS_Status : 360|8@0+ (1,0) [0|255] "" Vector__XXX
- SG_ INS_Std_Lat : 376|16@0+ (0.001,0) [0|655.35] "" Vector__XXX
- SG_ INS_Std_Lon : 392|16@0+ (0.001,0) [0|655.35] "" Vector__XXX
- SG_ INS_Std_LocatHeight : 408|16@0+ (0.001,0) [0|655.35] "" Vector__XXX
- SG_ INS_Std_Heading : 424|16@0+ (0.001,0) [0|655.35] "" Vector__XXX
+ 
+BO_ 1281 INS_GYRO: 6 Vector__XXX
+ SG_ GYRO_X : 8|16@0+ (0.0076293,-250) [-250|250] "deg/s" Vector__XXX
+ SG_ GYRO_Y : 24|16@0+ (0.0076293,-250) [-250|250] "deg/s" Vector__XXX
+ SG_ GYRO_Z : 40|16@0+ (0.0076293,-250) [-250|250] "deg/s" Vector__XXX
+
+BO_ 1282 INS_HeadingPitchRoll: 6 Vector__XXX
+ SG_ INS_PitchAngle : 8|16@0+ (0.010986,-250) [-360|360] "deg" Vector__XXX
+ SG_ INS_RollAngle : 24|16@0+ (0.010986,-250) [-360|360] "deg" Vector__XXX
+ SG_ INS_HeadingAngle : 40|16@0+ (0.010986,-250) [-360|360] "deg" Vector__XXX
+ 
+BO_ 1283 INS_HeightAndTime: 4 Vector__XXX
+ SG_ INS_LocatHeight : 24|32@0+ (0.001,-10000) [-10000|10000] "m" Vector__XXX
+ SG_ INS_Time : 56|32@0+ (1,0) [0|4.29497e9] "ms" Vector__XXX
+ 
+BO_ 1284 INS_LatitudeLongitude: 4 Vector__XXX
+ SG_ INS_Latitude : 24|32@0+ (0.0000001,-180) [-180|180] "deg" Vector__XXX
+ SG_ INS_Longitude : 56|32@0+ (0.0000001,-180) [-180|180] "deg" Vector__XXX
+ 
+BO_ 1285 INS_Speed: 6 Vector__XXX
+ SG_ INS_NorthSpd : 8|16@0+ (0.0030517,-100) [-100|100] "m/s" Vector__XXX
+ SG_ INS_EastSpd : 24|16@0+ (0.0030517,-100) [-100|100] "m/s" Vector__XXX
+ SG_ INS_ToGroundSpd : 40|16@0+ (0.0030517,-100) [-100|100] "m/s" Vector__XXX
+ 
+BO_ 1286 INS_DataInfo: 6 Vector__XXX 
+ SG_ INS_GpsFlag_Pos : 0|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ INS_NumSV : 8|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ INS_GpsFlag_Heading : 16|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ INS_Gps_Age : 24|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ INS_Car_Status : 32|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ INS_Status : 40|8@0+ (1,0) [0|255] "" Vector__XXX
+ 
+BO_ 1287 INS_Std: 8 Vector__XXX
+ SG_ INS_Std_Lat : 8|16@0+ (0.001,0) [0|655.35] "" Vector__XXX
+ SG_ INS_Std_Lon : 24|16@0+ (0.001,0) [0|655.35] "" Vector__XXX
+ SG_ INS_Std_LocatHeight : 40|16@0+ (0.001,0) [0|655.35] "" Vector__XXX
+ SG_ INS_Std_Heading : 56|16@0+ (0.001,0) [0|655.35] "" Vector__XXX
+
+BO_ 1288 BASE_RTCM: 64 Vector__XXX
+ SG_ BASE : 56|64@0+ (0,0) [0|0] "" Vector__XXX
+
 
 BA_DEF_ BO_ "GenMsgCycleTime" INT 0 65535;
 BA_DEF_ BO_ "GenMsgSendType" ENUM "cyclic","OnChange";
